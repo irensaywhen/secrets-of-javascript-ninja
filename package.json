@@ -1,0 +1,17 @@
+{
+  "name": "secrets-of-javascript-ninja",
+  "version": "1.0.0",
+  "description": "This is a directory for learning and practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Irina Gataullina",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.4.2"
+  },
+  "dependencies": {
+    "prettier": "^2.1.1"
+  }
+}

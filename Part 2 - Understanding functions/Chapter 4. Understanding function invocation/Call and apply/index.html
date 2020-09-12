@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Function invocation with call and apply</title>
+  </head>
+  <body>
+    <button id="test">Click me!</button>
+    <button id="test-bind">Click me too!</button>
+    <script>
+      function Button() {
+        this.clicked = false;
+        // The arrow function remember the value of this
+        //  from the moment it was created
+        this.click = () => {
+          this.clicked = true;
+          console.assert(
+            button.clicked,
+            'The state of the button was not change!'
+          );
+        };
+      }
+
+      var anotherButton = {
+        clicked: false,
+        click: function () {
+          this.clicked = true;
+          console.assert(
+            this.clicked,
+            'The state of the button was not change!'
+          );
+        },
+      };
+
+      var button = new Button();
+
+      var elem = document.getElementById('test');
+      var elem2 = document.getElementById('test-bind');
+
+      elem.addEventListener('click', button.click);
+      elem2.addEventListener('click', anotherButton.click.bind(this));
+    </script>
+  </body>
+</html>
