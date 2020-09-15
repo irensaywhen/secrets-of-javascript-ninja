@@ -7,6 +7,8 @@ function animateIt(elementId) {
       elem.innerHTML = tick;
       tick++;
     } else {
+      // After calling this function, a new lexical env is being created
+      // This env will be alive until we call clearInterval func
       clearInterval(timer);
       console.assert(tick === 100, 'Tick is not 100');
       console.assert(elem, 'Element is not accessible via a closure');
