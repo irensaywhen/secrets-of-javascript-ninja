@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Using generators to traverse the DOM</title>
+  </head>
+  <body>
+    <div id="subTree">
+      <form>
+        <input type="text" />
+      </form>
+      <p>Paragraph</p>
+      <span>Span</span>
+    </div>
+    <script>
+      // Recursively traverse the DOM
+      function traverseDOM(element, callback) {
+        // Process the current node with a callback
+        callback(element);
+        // firstElementChild returns the object's first child
+        element = element.firstElementChild;
+        while (element) {
+          traverseDOM(element, callback);
+          element = element.nextElementSibling;
+        }
+      }
+      const subTree = document.getElementById('subTree');
+      //traverseDOM(subTree, function (element) {
+      //  console.log(element);
+      //});
+
+      // Iterating over a DOM tree with generators
+      function* DomTraversal(element) {
+        yield element;
+        element = element.firstElementChild;
+        while (element) {
+          yield* DomTraversal(element);
+          element = element.nextElementSibling;
+        }
+      }
+
+      for (let element of DomTraversal(subTree)) {
+        console.log(element);
+      }
+    </script>
+  </body>
+</html>
