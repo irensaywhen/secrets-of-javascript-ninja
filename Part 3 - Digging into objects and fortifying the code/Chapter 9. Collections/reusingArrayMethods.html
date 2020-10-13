@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reusing array methods</title>
+  </head>
+  <body>
+    <input type="text" id="first" />
+    <input type="text" id="second" />
+    <script>
+      const elems = {
+        length: 0,
+        add: function (elem) {
+          // We're forcing push method to have context of our object
+          Array.prototype.push.call(this, elem);
+        },
+        gather: function (id) {
+          this.add(document.getElementById(id));
+        },
+        find: function (callback) {
+          return Array.prototype.find.call(this, callback);
+        },
+      };
+
+      elems.gather('first');
+      console.log(`There are ${elems.length} elements in our object`);
+      elems.gather('second');
+      console.log(`There are ${elems.length} elements in our object`);
+      console.log(elems.find(elem => elem.id === 'first'));
+    </script>
+  </body>
+</html>

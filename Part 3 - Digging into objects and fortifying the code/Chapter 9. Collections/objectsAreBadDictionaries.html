@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objects are bad dictionaries</title>
+  </head>
+  <body>
+    <div id="firstElement"></div>
+    <div id="secondElement"></div>
+    <script>
+      const firstElement = document.getElementById('firstElement');
+      const secondElement = document.getElementById('secondElement');
+
+      const map = {};
+
+      map[firstElement] = { data: 'firstElement' };
+      console.assert(
+        map[firstElement].data === 'firstElement',
+        'Something wrong with the first element'
+      );
+
+      map[secondElement] = { data: 'secondElement' };
+      console.assert(
+        map[secondElement].data === 'secondElement',
+        'Something wrong with the second element'
+      );
+
+      console.assert(
+        map[firstElement].data === 'firstElement',
+        'Something wrong with the first element'
+      );
+
+      console.assert(
+        map[firstElement].data === 'secondElement',
+        'Something wrong with the first element'
+      );
+
+      // This happens because the toString method of objects were called
+    </script>
+  </body>
+</html>
